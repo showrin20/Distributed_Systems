@@ -130,7 +130,6 @@ This structure enables asynchronous workflows, where each service processes even
   - Scaling compute and storage are distinct challenges that require separate solutions.  
   - Use managed services (e.g., **Confluent Cloud**) to simplify scaling operations.  
 
----
 
 ## **Practical Lessons for Successful EDA Implementation:**
 
@@ -186,3 +185,146 @@ This structure enables asynchronous workflows, where each service processes even
 - Managed services and existing tools can reduce complexity and operational burden.
   
 ![mindmap](mind.png)
+
+
+
+# [**Distributed Systems in One Lesson: Overview and Insights**](https://www.youtube.com/watch?v=Y6Ev8GIlbxc)
+
+Key Context:  
+- Specializes in distributed systems, especially Apache Kafka.  
+- Emphasizes the complexities and challenges of distributed systems while introducing open-source tools to solve them.  
+- Goal: Convince developers to avoid unnecessary distributed systems but provide insights for those who must build them.
+
+
+### **What is a Distributed System?**  
+Definition by Andrew Tanenbaum: A collection of independent computers that appear as one system to the user.  
+Characteristics:  
+1. **Multiple Computers** operating concurrently.  
+2. **Independent Failures** where any machine can fail without notice.  
+3. **No Global Clock**, meaning systems do not share synchronized time.  
+
+Examples:  
+- Amazon.com  
+- Cassandra Cluster  
+- Kafka Cluster  
+
+
+### **Core Challenges in Distributed Systems**  
+1. **Storage**  
+   - Scaling databases introduces complexity and sacrifices guarantees.  
+   - Issues: Consistency, performance under load, and the need for sharding.  
+
+2. **Computation**  
+   - Moving from single-threaded computation to distributed processing is challenging.  
+   - Tools like Hadoop, Spark, and Kafka Streams address these challenges.  
+
+3. **Messaging**  
+   - Facilitates communication between decoupled systems (e.g., microservices).  
+   - Tools like Apache Kafka offer scalable solutions but require tradeoffs in ordering and consistency.
+
+
+### **Key Topics Discussed**
+
+#### **Storage in Distributed Systems**  
+Single-server databases are simple but lack scalability.  
+
+**Scaling Techniques**  
+1. **Read Replication**:  
+   - Copies data across servers for scalability.  
+   - Breaks consistency as data may not propagate instantly (eventual consistency).  
+2. **Sharding**:  
+   - Divides data based on keys (e.g., usernames).  
+   - Breaks the relational model, making joins impossible across shards.  
+3. **Denormalization**:  
+   - Sacrifices relational guarantees like joins to improve performance.  
+   - Adds complexity to data modeling.  
+
+**Cassandra’s Approach**  
+1. Uses **consistent hashing** to evenly distribute data across nodes.  
+2. Data is replicated across multiple nodes to tolerate failures.  
+3. Consistency tradeoffs:  
+   - Developers can tune read and write consistency levels (e.g., eventual vs. strong consistency).  
+4. Example: If three replicas exist, reading two nodes and writing to two ensures strong consistency.  
+
+**CAP Theorem**  
+1. **Consistency**: Ensures data is up-to-date across all nodes.  
+2. **Availability**: Guarantees the system is responsive.  
+3. **Partition Tolerance**: Tolerates network failures.  
+   - CAP Theorem states that systems can only guarantee two out of three.  
+   - Example: Choose consistency or availability during a network partition.  
+
+#### **Computation in Distributed Systems**  
+Computation in single-threaded systems is easy but becomes difficult in distributed environments.  
+
+**MapReduce Paradigm**  
+1. Divides data into chunks and processes them in parallel (map step).  
+2. Aggregates results to produce final output (reduce step).  
+3. Works well for batch processing but lacks flexibility.  
+4. Example: Hadoop uses MapReduce for distributed computation.  
+
+**Spark’s Improvements**  
+1. Introduced Resilient Distributed Datasets (RDDs) and DataFrames for developer-friendly APIs.  
+2. Supports distributed computation on various data sources (HDFS, S3, Cassandra).  
+3. Faster and more intuitive than Hadoop.  
+
+**Kafka Streams**  
+1. Focuses on **stream processing**, computing data in real time as it flows through the system.  
+2. Complements batch processing tools like Spark by handling continuous data streams.  
+
+
+#### **Messaging in Distributed Systems**  
+Messaging enables communication between loosely coupled services, making it essential for microservices.  
+
+**Traditional Message Queues**  
+1. Single-server message brokers are simple but lack scalability and fault tolerance.  
+2. Challenges:  
+   - Single points of failure.  
+   - Limited throughput due to server constraints.  
+
+**Apache Kafka**  
+1. **Partitioning**:  
+   - Splits topics into partitions distributed across multiple servers.  
+   - Guarantees ordering within partitions but not across them.  
+2. **Replication**:  
+   - Ensures fault tolerance by replicating partitions across nodes.  
+3. **Elastic Scalability**:  
+   - Can scale horizontally by adding brokers to the cluster.  
+4. **Data Retention**:  
+   - Allows configurable retention periods for stored messages.  
+
+**Advantages of Kafka**  
+1. **Stream Processing**:  
+   - Enables real-time computation on data in motion.  
+2. **Decoupling Services**:  
+   - Events in Kafka topics can be consumed independently by multiple services.  
+3. **Anti-Pattern Avoidance**:  
+   - Reduces reliance on dual batch-stream processing systems (Lambda architecture).  
+
+
+### **Key Insights and Best Practices**  
+
+**When to Use Distributed Systems**  
+1. Use distributed systems only when scale and fault tolerance are critical.  
+2. Avoid unnecessary complexity for small-scale systems.  
+
+**Storage**  
+1. Plan for scaling by using replication and sharding.  
+2. Accept tradeoffs in consistency and data modeling.  
+3. Use distributed databases like Cassandra for predictable scaling behavior.  
+
+**Computation**  
+1. Leverage modern tools like Spark and Kafka Streams for distributed processing.  
+2. Prefer real-time stream processing over batch processing when possible.  
+
+**Messaging**  
+1. Use message brokers like Kafka to decouple services and enable asynchronous communication.  
+2. Design systems to tolerate eventual consistency and partitioning constraints.  
+
+
+### **Conclusion**  
+Distributed systems solve critical scalability and fault tolerance challenges but introduce complexity.  
+Adopt distributed systems only when necessary, and use modern tools like Cassandra, Spark, and Kafka to handle common challenges effectively.  
+
+## Final note: Tim encourages developers to embrace simplicity where possible but acknowledges the growing importance of distributed systems in modern software architecture.
+
+![mindmap](mind1.png)
