@@ -1,6 +1,6 @@
 # [Chapter 1](https://drive.google.com/file/d/1lsY0n-Ov5AiL6pCv7tv2U4vI3WyI6h9_/view?usp=sharing)
 
-### Detailed Notes on Chapter 1: Introduction to Distributed Systems (4th Edition, Version 01)
+##  Introduction to Distributed Systems
 
 
 #### **1. Introduction: From Networked Systems to Distributed Systems**
