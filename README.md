@@ -17,6 +17,27 @@
 
 
 
+| **Category**                  | **Details**                                                                                                                                                                                                                                                                                                                                                                                |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **From Networked to Distributed Systems** | - **Centralized Systems**: Managed by a single node. <br> - **Decentralized Systems**: Distributed processes without full coordination. <br> - **Distributed Systems**: Processes sufficiently coordinated to operate as one. <br> - **Transition**: Adding links between nodes transforms decentralized systems into distributed ones. |
+| **Alternative Approaches**    | - **Integrative View**: Combines existing systems into one.<br> - **Expansive View**: Extends systems with new nodes. <br> **Definitions**: <br> - **Decentralized System**: Processes necessarily distributed. <br> - **Distributed System**: Processes sufficiently distributed for coordination.                                                       |
+| **Common Misconceptions**     | - **Centralized Systems**: Often scalable, e.g., DNS: <br> - Logically centralized, physically distributed. <br> - Robust designs reduce failure points.<br> - Misconceptions about scalability and security require systematic evaluation.                                                                                                                                               |
+| **Perspectives on Systems**   | - **Architecture**: System organization.<br> - **Processes**: Types and interactions. <br> - **Communication**: Mechanisms for data exchange. <br> - **Coordination**: Independent algorithms. <br> - **Naming**: Resource identification. <br> - **Consistency & Replication**: Data uniformity.<br> - **Fault Tolerance**: Partial failure handling. <br> - **Security**: Authorized access. |
+| **Design Goals**              | - **Resource Sharing**: Examples: Cloud storage, peer-to-peer streaming.<br> - **Distribution Transparency**: Hides distributed nature; types include Access, Location, Replication, and Concurrency transparency.<br> - **Openness**: Seamless integration via interfaces. <br> - **Dependability**: Reliability, Availability, Safety, Maintainability.<br> - **Scalability**: Size, geography, admin. |
+| **Security**                  | - **Aspects**: Confidentiality, Integrity, Authentication, Authorization, Trust. <br> - **Mechanisms**: <br> - Symmetric encryption: Shared key. <br> - Asymmetric encryption: Public/private keys. <br> - Hashing: Data integrity verification.<br> - Digital signatures: Authenticity and origin validation.                                                                                |
+| **Scalability Techniques**    | - **Latency Hiding**: Asynchronous communication. <br> - **Partitioning**: Distribute tasks across nodes. <br> - **Replication/Caching**: Store multiple data copies; challenge: consistency and synchronization.                                                                                                                                                                       |
+| **System Classifications**    | - **High-Performance Computing**: Multiprocessor, multicore, grid systems.<br> - **Distributed Information Systems**: Middleware for integration (RPC, MOM).<br> - **Pervasive Systems**: <br> - Ubiquitous: Continuous user interaction.<br> - Mobile: Adapts to location changes.<br> - Sensor Networks: Collaborative environmental monitoring.                                      |
+| **Pitfalls**                  | - **False Assumptions**: <br> - Network is reliable/secure.<br> - Topology is static.<br> - Zero latency/infinite bandwidth.<br> - Zero transport costs.<br> - Single administrator.                                                                                                                                                                                                      |
+
+
+
+![distributed system]()
+
+
+
+
+
+
 
 
 | **Category**         | **Centralized Systems**                                                                                                  | **Decentralized Systems**                                                                                                       | **Distributed Systems**                                                                                                       |
