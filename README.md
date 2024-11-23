@@ -13,5 +13,5 @@
    - [Four Distributed Systems Architectural Patterns by Tim Berglund](https://www.youtube.com/watch?v=BO761Fj6HH8)
    - [The Many Meanings of Event-Driven Architecture • Martin Fowler](https://www.youtube.com/watch?v=STKCRSUsyP0)
   
-   [Here Are Notes from videos](https://github.com/showrin20/Distributed_Systems/tree/main/Tim%20Berglund)
+   # [Here Are Notes from videos](https://github.com/showrin20/Distributed_Systems/tree/main/Tim%20Berglund)
   
