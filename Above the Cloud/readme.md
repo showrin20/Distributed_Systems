@@ -1,3 +1,6 @@
+
+# [Above the Clouds: A Berkeley View of Cloud Computing](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.html)
+
 ### **প্রশ্ন ১: What is Cloud Computing এবং এর প্রধান বৈশিষ্ট্য কী?**
 **উত্তর:**  
 Cloud Computing হল একটি সিস্টেম যেখানে **applications** ইন্টারনেটের মাধ্যমে পরিষেবা হিসেবে সরবরাহ করা হয় এবং এর জন্য প্রয়োজনীয় হার্ডওয়্যার ও **datacenters** ক্লাউডে অবস্থিত থাকে। এর প্রধান বৈশিষ্ট্যগুলো:
