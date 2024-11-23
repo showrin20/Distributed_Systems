@@ -641,11 +641,142 @@ List the contents of `Desktop` in long format, including hidden files, and sort 
    mkdir -p 2024-11-23/data/raw 2024-11-23/data/processed
    ```
 
-=
-
 #### **Key Points**
 - Shortcuts:
   - `Ctrl+C`: Stop current command.
   - `Tab`: Auto-complete paths/commands.
 - Use pipes and redirects for efficiency.
 - Be cautious with `rm` and `>` to prevent data loss.
+
+
+### **Additional Details to Include**
+
+#### **1. Command Syntax and Terminology**
+- **General Command Syntax**:
+  ```bash
+  command [options] [arguments]
+  ```
+  - **Command**: The operation to perform (e.g., `ls`).
+  - **Options**: Modify command behavior (`-l`, `-h`).
+  - **Arguments**: Specify the target of the command (e.g., `file.txt`).
+
+#### **2. Directory Hierarchy Explanation**
+- Filesystem hierarchy is organized like an inverted tree:
+  ```
+  /
+  ├── Users/
+  │   ├── nelle/
+  │       ├── Desktop/
+  │       ├── Documents/
+  │       └── Downloads/
+  ```
+  - `/`: Root directory.
+  - Hidden files and directories begin with `.` (e.g., `.bash_profile`).
+
+
+
+#### **3. More on Wildcards**
+- Wildcards allow flexible file selection:
+  - `*.txt`: Matches all `.txt` files.
+  - `a*`: Matches files starting with `a`.
+  - `?`: Matches exactly one character (e.g., `?ane.pdb` matches `bane.pdb` and `cane.pdb`).
+
+
+#### **4. `less` Command**
+- Alternative to `cat` for viewing files page by page:
+  ```bash
+  less file.txt
+  ```
+  - **Navigation**:
+    - `Space`: Scroll forward.
+    - `b`: Scroll backward.
+    - `/pattern`: Search for a term.
+    - `q`: Quit.
+
+
+#### **5. Explanation of Key Shell Tools**
+- **`grep`**:
+  - Searches for patterns in files:
+    ```bash
+    grep "deer" animals.csv
+    ```
+    Output: Lines containing "deer".
+  - Options:
+    - `-i`: Case-insensitive search.
+    - `-v`: Invert match (lines NOT containing the pattern).
+
+- **`uniq`**:
+  - Removes duplicate lines (requires sorted input):
+    ```bash
+    sort file.txt | uniq
+    ```
+
+- **`cut`**:
+  - Extracts specific fields from text:
+    ```bash
+    cut -d, -f2 animals.csv
+    ```
+    Output: Second column (animal names) from `animals.csv`.
+
+
+#### **6. More Practical Examples**
+- **Sorting Files in Reverse Chronological Order**:
+  ```bash
+  ls -lt | sort -r
+  ```
+
+- **Copying Files Based on Date**:
+  ```bash
+  cp 2015-11-*-*.txt backup/
+  ```
+  - Copies all `.txt` files from November 2015 to the `backup` directory.
+
+- **Iterative Commands (Loops)**:
+  - Process multiple files using a loop:
+    ```bash
+    for file in *.csv
+    do
+      echo "Processing $file"
+      head -n 1 $file
+    done
+    ```
+
+#### **7. Safety with `rm`**
+- Emphasize interactive deletion with `-i`:
+  ```bash
+  rm -i file.txt
+  ```
+- Recursive directory removal:
+  ```bash
+  rm -r folder_name
+  ```
+
+#### **8. Advanced Navigation**
+- Move multiple levels up:
+  ```bash
+  cd ../../
+  ```
+- Combine shortcuts with paths:
+  ```bash
+  cd ~/Documents/../Desktop
+  ```
+
+#### **9. Shell Scripts**
+- A shell script is a file containing a sequence of commands:
+  ```bash
+  #!/bin/bash
+  echo "Starting script..."
+  wc -l *.txt | sort -n | head -n 1
+  echo "Done."
+  ```
+- Run a script:
+  ```bash
+  bash script.sh
+  ```
+
+#### **10. Unix Philosophy**
+- **Pipes and Filters**: Each command does one job well, and you can combine them for complex tasks.
+- Example:
+  ```bash
+  sort file.txt | uniq | wc -l
+  ```
