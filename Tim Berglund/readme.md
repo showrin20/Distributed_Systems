@@ -469,4 +469,5 @@ A cutting-edge approach that treats all data as streams of events, focusing on r
 
 1. **Choose Simplicity First:** Avoid distributed systems unless absolutely necessary.  
 2. **Tailor to Your Needs:** Different architectures suit different contexts—sharding is great for predictable workloads, while streaming excels in dynamic, real-time systems.  
-3. **Adopt Modern Tools:** Technologies like Cassandra, Spark, and Kafka streamline distributed system development but require expertise.  
+3. **Adopt Modern Tools:** Technologies like Cassandra, Spark, and Kafka streamline distributed system development but require expertise.
+![mindmap](mind2.png)
