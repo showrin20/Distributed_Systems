@@ -207,3 +207,250 @@ This chapter establishes a strong foundation for understanding distributed syste
 6. **Cloud Computing Layers**: Understanding the distinct layers of cloud computing—from hardware to applications—helps organizations to optimize their resource usage and deploy services effectively, catering to diverse user needs. ☁️
 
 7. **Blockchain Consensus Mechanisms**: The choice of consensus mechanism in blockchain systems impacts scalability and security. Distributed solutions are more resilient but complex, while centralized solutions may compromise decentralization principles. 🔒
+
+# Slide 2
+
+
+### **Architectural Styles**
+
+**Basic Idea**  
+An architectural style is defined by the following aspects:
+1. **Components**: Replaceable elements with well-defined interfaces.  
+2. **Connectors**: Mechanisms that mediate communication, coordination, or cooperation among components. Examples include facilities for (remote) procedure calls, messaging, or streaming.  
+3. **Data Exchange**: The way data is shared between components.  
+4. **System Configuration**: The overall organization of components and connectors within the system.  
+
+### **Connectors**
+A connector acts as a communication facilitator between components.  
+**Examples**:  
+- Remote procedure calls  
+- Messaging systems  
+- Streaming protocols  
+
+
+### **Layered Architecture**
+Layered architecture organizes the system into distinct layers, where each layer is responsible for specific tasks or functionality.  
+
+#### **Different Layered Organizations**  
+Layered architecture can have various configurations depending on the system's requirements.
+
+
+
+### **Example: Communication Protocols**
+
+#### **Key Concepts**
+- **Protocol**: Rules for communication.  
+- **Service**: Functions provided by a layer.  
+- **Interface**: Boundary for interaction between layers.  
+
+#### **Layered Communication Example**  
+- A client-server model demonstrates layered communication effectively.  
+- Below is an example implementation in Python:  
+
+**Server**  
+```python
+from socket import *
+
+s = socket(AF_INET, SOCK_STREAM)
+s.bind((HOST, PORT))
+s.listen(5)
+(conn, addr) = s.accept()  # Accepts connection and returns socket and address
+
+while True:  # Run indefinitely
+    data = conn.recv(1024)  # Receive data from the client
+    if not data:
+        break  # Stop if client disconnects
+    msg = data.decode() + "*"  # Process the data
+    conn.send(msg.encode())  # Send response back to the client
+conn.close()  # Close connection
+```
+
+**Client**  
+```python
+from socket import *
+
+s = socket(AF_INET, SOCK_STREAM)
+s.connect((HOST, PORT))  # Connect to the server
+msg = "Hello World"  # Message to send
+s.send(msg.encode())  # Send the message
+data = s.recv(1024)  # Receive server response
+print(data.decode())  # Display response
+s.close()  # Close connection
+```
+
+
+
+### **Application Layering**
+
+#### **Traditional Three-Layered Architecture**  
+1. **Application-Interface Layer**  
+   - Provides interaction with users or external systems.  
+2. **Processing Layer**  
+   - Contains core functionalities of the application, independent of data.  
+3. **Data Layer**  
+   - Manages and stores data accessed or manipulated by the application.  
+
+#### **Observation**  
+This structure is widely used in distributed information systems, often with traditional database technologies.
+
+
+
+### **Architectural Styles**
+
+#### **Layered Architectures**
+Layered architectures organize systems into distinct layers, with each layer focusing on a specific functionality.  
+Example: A simple search engine implementation where layers include:  
+1. User Interface Layer handles user input and displays results.  
+2. Processing Layer performs indexing and search algorithms.  
+3. Data Layer stores the indexed data.  
+
+#### **Object-Based Style**
+Components are treated as objects.  
+Objects interact via procedure calls, which may execute across a network.  
+Objects encapsulate data and expose methods to interact with the data without revealing the internal implementation.
+
+#### **Service-Oriented Architectures (SOA)**
+
+**RESTful Architectures**  
+REST views a distributed system as a collection of resources. These resources can be added, retrieved, modified, or deleted.  
+
+Resources are identified through a uniform naming scheme such as URIs.  
+Services provide a consistent interface.  
+Messages are self-descriptive.  
+After executing an operation, the service does not retain the caller’s state.  
+
+**Basic RESTful Operations**  
+| Operation | Description                          |  
+|-----------|--------------------------------------|  
+| PUT       | Create a new resource.              |  
+| GET       | Retrieve the state of a resource.   |  
+| DELETE    | Remove a resource.                  |  
+| POST      | Modify or update a resource’s state.|  
+
+**Example: Amazon S3**  
+Amazon’s Simple Storage Service (S3) is a practical example.  
+Objects (files) are placed in buckets (directories).  
+Buckets cannot contain other buckets.  
+Objects are identified by `http://BucketName.s3.amazonaws.com/ObjectName`.  
+
+**Operations in S3**  
+Create a bucket or object using PUT with a URI.  
+List objects using GET on a bucket name.  
+Retrieve an object using GET with a full URI.  
+
+**RESTful Interfaces**  
+RESTful interfaces are simple but require precise handling of parameters.  
+
+**Simplification Example**  
+An interface for creating a bucket named "mybucket."  
+
+**SOAP Example**  
+```python
+import bucket
+bucket.create("mybucket")
+```  
+
+### **Architectural Styles**
+
+#### **Service-Oriented Architectures (SOA)**  
+
+**On Interfaces**  
+Simplified interfaces enable straightforward interactions.  
+
+**Examples**:  
+1. **SOAP**  
+   ```python
+   import bucket
+   bucket.create("mybucket")
+   ```  
+   This creates a bucket named "mybucket" using a method call.  
+
+2. **RESTful Interface**  
+   ```
+   PUT "https://mybucket.s3.amazonaws.com/"
+   ```  
+   This sends an HTTP PUT request to create a bucket named "mybucket."  
+
+**Conclusions**  
+Both SOAP and RESTful interfaces achieve similar goals but differ in implementation. REST is lightweight and flexible, while SOAP offers more structured messaging with built-in error handling and security features.  
+
+---
+
+#### **Coordination in Architectures**  
+
+**Temporal and Referential Coupling**  
+1. **Temporally Coupled**  
+   - Communication happens in real-time.  
+   - Direct interactions, such as method calls or socket communication.  
+
+2. **Referentially Coupled**  
+   - Components directly reference each other. Example: Direct method invocation.  
+
+3. **Referentially Decoupled**  
+   - Components do not directly reference each other.  
+
+   **Examples**:  
+   - **Event-Based Communication**: Messages published and subscribed to by components.  
+   - **Shared Data Space**: Components interact by reading and writing to a common storage.  
+
+---
+
+#### **Publish-Subscribe Architectures**  
+
+**Example: Linda Tuple Space**  
+Linda is a coordination model where components interact through a shared "tuple space."  
+
+**Operations**:  
+- **`in(t)`**: Removes a tuple matching template `t`.  
+- **`rd(t)`**: Copies a tuple matching template `t`.  
+- **`out(t)`**: Adds a tuple `t` to the tuple space.  
+
+**Details**:  
+- **Tuple Space as a Multiset**: Calling `out(t)` twice stores two identical tuples.  
+- **Blocking Operations**: `in` and `rd` block until a matching tuple becomes available.  
+
+---
+
+**Example Code**  
+
+**Bob**  
+```python
+import linda
+linda.connect()
+
+blog = linda.TupleSpace()
+linda.universe._out(("MicroBlog", blog))
+blog._out(("bob", "distsys", "I am studying chap 2"))
+blog._out(("bob", "distsys", "The linda example’s pretty simple"))
+blog._out(("bob", "gtcn", "Cool book!"))
+```
+
+**Alice**  
+```python
+import linda
+linda.connect()
+
+blog = linda.universe._rd(("MicroBlog", linda.TupleSpace))[1]
+blog._out(("alice", "gtcn", "This graph theory stuff is not easy"))
+blog._out(("alice", "distsys", "I like systems more than graphs"))
+```
+
+**Chuck**  
+```python
+import linda
+linda.connect()
+
+blog = linda.universe._rd(("MicroBlog", linda.TupleSpace))[1]
+t1 = blog._rd(("bob", "distsys", str))
+t2 = blog._rd(("alice", "gtcn", str))
+t3 = blog._rd(("bob", "gtcn", str))
+
+print(t1)
+print(t2)
+print(t3)
+```
+
+This example demonstrates a publish-subscribe mechanism where tuples are shared, read, or removed across distributed components.
+
+
+
