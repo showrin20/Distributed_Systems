@@ -450,7 +450,121 @@ print(t2)
 print(t3)
 ```
 
-This example demonstrates a publish-subscribe mechanism where tuples are shared, read, or removed across distributed components.
 
 
+### **Publish-Subscribe Architectures**
+
+**Issue: How to Match Events?**  
+- **Event Description**: Events are described as `(attribute, value)` pairs.  
+- **Matching Methods**:  
+  - **Topic-based Subscription**: Specify attributes and values (e.g., `attribute = value`).  
+  - **Content-based Subscription**: Define attributes within a range (e.g., `attribute ∈ range`).  
+
+**Observation**:  
+- **Scalability Challenge**:  
+  - Content-based subscriptions may face serious scalability issues due to the need for continuous filtering and matching of ranges across numerous events, especially in large-scale distributed systems.
+
+
+
+### **Middleware and Distributed Systems**
+
+**Middleware as the OS of Distributed Systems**  
+- Provides common components and functions, reducing the need for separate implementations in applications.  
+
+**Using Legacy Systems for Middleware**  
+- **Problem**: Legacy component interfaces may not suit all applications.  
+- **Solution**: Use wrappers or adapters to translate client requests into functions compatible with the component.  
+
+**Wrapper Organization**  
+1. **1-on-1 Wrappers**:  
+   - Complexity: \(O(N^2)\), requiring \(N \times (N - 1)\) wrappers.  
+2. **Broker-based Wrappers**:  
+   - Complexity: \(O(N)\), requiring only \(2N\) wrappers.  
+
+**Developing Adaptable Middleware**  
+- Problem: Middleware is often designed for general use, but may need behavior adjustments for specific applications.  
+- Solution: Intercept and modify the control flow to adapt functionality as needed.
+
+
+
+### **Layered-System Architectures**
+
+**Centralized Systems**  
+- **Basic Client-Server Model**:  
+  - Servers provide services; clients use them.  
+  - Follows a request/reply model.  
+- **Multi-Tiered Configurations**:  
+  - Single-tier: Mainframe/dumb terminal.  
+  - Two-tier: Client-server.  
+  - Three-tier: Separate machines for presentation, logic, and data.  
+
+**Example: Network File System (NFS)**  
+- **Features**:  
+  - Standardized local file system views.  
+  - Remote access for uploading/downloading files.  
+- **Comparison**:  
+  - FTP uses a similar upload/download model.  
+
+
+
+### **Symmetrically Distributed Architectures**
+
+**Peer-to-Peer (P2P) Systems**  
+- **Horizontal Distribution**:  
+  - Logical parts operate on separate data shares.  
+- **Peer-to-Peer Features**:  
+  - All processes act as both client and server.  
+
+**Structured P2P (e.g., Chord)**  
+- **Principles**:  
+  - Nodes in a ring structure, each with a unique identifier.  
+  - Data is hashed and stored at the node with the closest matching identifier.  
+- **Shortcut Links**: Speed up lookups.  
+
+**Unstructured P2P**  
+- **Flooding**:  
+  - Broadcast requests to all neighbors; can limit via TTL.  
+- **Random Walk**:  
+  - Forward requests randomly until the desired data is found.  
+
+**Comparison**:  
+- Flooding is faster but less efficient.  
+- Random walks save bandwidth but take longer.  
+
+**Super-Peer Networks**  
+- Break symmetry by introducing indexing servers for improved performance and efficient data storage decisions.
+
+
+
+### **Hybrid Architectures**
+
+**Cloud Computing**  
+- **Layers**:  
+  1. **Hardware**: Processors, routers, etc.  
+  2. **Infrastructure**: Virtualization of servers and storage.  
+  3. **Platform**: APIs for higher-level abstractions.  
+  4. **Application**: User-facing software like office suites.  
+
+**Edge Computing**  
+- **Essence**: Servers deployed at network boundaries for latency reduction, reliability, and security.  
+- **Challenges**:  
+  - Resource allocation and service placement decisions.  
+  - Selecting appropriate edge infrastructures.
+
+
+
+### **Blockchain Architectures**
+
+**Principles**  
+- Immutable, append-only blocks organized in a chain.  
+- Requires distributed consensus for appending blocks.  
+
+**Consensus Mechanisms**  
+1. **Centralized**: Single entity decides (not aligned with blockchain's decentralized goals).  
+2. **Distributed (Permissioned)**:  
+   - Consensus by a small, trusted group of servers.  
+   - Suitable for smaller, permissioned systems.  
+3. **Decentralized (Permissionless)**:  
+   - Large-scale leader election for appending blocks.  
+   - Requires robust mechanisms for fairness and security.
 
