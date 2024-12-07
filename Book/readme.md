@@ -181,7 +181,7 @@ This chapter establishes a strong foundation for understanding distributed syste
 
 
 
-# Chapter 1
+# Chapter 2
 
 
 ### Highlights -📜
