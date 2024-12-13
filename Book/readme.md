@@ -568,3 +568,127 @@ print(t3)
    - Large-scale leader election for appending blocks.  
    - Requires robust mechanisms for fairness and security.
 
+
+
+# Chapter 3
+
+### Processes and Threads
+
+#### Introduction to Threads
+**Basic Idea:**
+Virtual processors are created in software on top of physical processors.
+
+- **Processor:** Provides a set of instructions and the capability to automatically execute a series of those instructions.
+- **Thread:** A minimal software processor that executes a series of instructions in its context. 
+  - Saving a thread context involves stopping the current execution and storing all necessary data to resume later.
+- **Process:** A software processor that can execute one or more threads. Executing a thread means running a sequence of instructions within the context of that thread.
+
+#### Context Switching
+**Contexts:**
+- **Processor Context:** The minimal collection of values stored in the processor’s registers required to execute a series of instructions (e.g., stack pointer, addressing registers, program counter).
+- **Thread Context:** The minimal collection of values stored in registers and memory required for thread execution (essentially the processor context plus its state).
+- **Process Context:** The minimal collection of values stored in registers and memory required for thread execution, including additional information such as MMU (Memory Management Unit) register values.
+
+#### Observations on Context Switching
+1. **Threads:**
+   - Share the same address space.
+   - Thread context switching is lightweight and does not require operating system (OS) involvement.
+2. **Processes:**
+   - Process switching requires OS involvement, making it relatively more expensive (e.g., trapping to the kernel).
+3. **Creation and Destruction:**
+   - Threads are faster and cheaper to create and destroy compared to processes.
+
+This text expands on the concepts of **processes**, **threads**, and their use cases, focusing on the benefits and observations about threads. Here's an organized explanation:
+
+---
+
+### Context Switching
+**Definition of Contexts**:
+1. **Processor Context**: Minimal data in processor registers required for executing instructions (e.g., stack pointer, program counter, addressing registers).
+2. **Thread Context**: Extends processor context with memory state required for thread execution.
+3. **Process Context**: Encompasses thread context plus additional data like MMU (Memory Management Unit) register values.
+
+---
+
+### Observations
+1. **Threads**:
+   - Share the same address space within a process.
+   - Context switching is lightweight and can occur without OS intervention.
+2. **Processes**:
+   - Switching between processes requires OS involvement, which makes it resource-intensive.
+3. **Thread Creation/Destruction**:
+   - Less resource-intensive compared to process creation and destruction.
+
+---
+
+### Why Use Threads?
+1. **Avoid Needless Blocking**:
+   - A single-threaded process blocks during I/O operations, but multithreaded processes allow the OS to switch the CPU to another thread.
+2. **Exploit Parallelism**:
+   - Threads in a multithreaded process can run in parallel on multi-core or multi-processor systems.
+3. **Avoid Process Switching**:
+   - Large applications can be structured as multithreaded processes rather than multiple processes, reducing process switching overhead.
+
+
+
+### **Trade-offs of Threads vs. Processes**
+1. **Advantages of Threads**:
+   - **Faster Context Switching**: Thread context switching is faster than process context switching.
+   - **Efficiency**: Avoids expensive process-switching overhead.
+
+2. **Disadvantages of Threads**:
+   - **Shared Address Space**:
+     - Threads share memory, which increases the risk of bugs (e.g., unintended overwrites).
+   - **No Built-in Memory Protection**:
+     - Threads lack OS or hardware support to prevent one thread from interfering with another's memory.
+
+---
+
+### **Cost of Context Switching**
+1. **Direct Costs**:
+   - Includes the time required for the actual context switch and executing the clock-interrupt handler code.
+
+2. **Indirect Costs**:
+   - Cache performance is affected due to switching, causing:
+     - **Cache misses** when switching between contexts.
+     - Re-loading of data (e.g., block D in the cache example), which slows performance.
+
+---
+
+### **Python Example: Multithreading with `multiprocessing`**
+
+The provided code demonstrates the use of Python's `multiprocessing` module to create and run multiple threads (or processes) executing concurrently.
+
+```python
+from multiprocessing import Process
+from time import sleep, gmtime
+from random import randint
+
+def sleeper(name):
+    t = gmtime()
+    s = randint(1, 20)
+    txt = f"{t.tm_min}:{t.tm_sec} {name} is going to sleep for {s} seconds"
+    print(txt)
+    sleep(s)
+    t = gmtime()
+    txt = f"{t.tm_min}:{t.tm_sec} {name} has woken up"
+    print(txt)
+
+if __name__ == '__main__':
+    p = Process(target=sleeper, args=('eve',))
+    q = Process(target=sleeper, args=('bob',))
+    p.start()
+    q.start()
+    p.join()
+    q.join()
+```
+
+**Output Example**:
+- Threads execute independently and concurrently:
+  ```
+  40:23 eve is going to sleep for 14 seconds
+  40:23 bob is going to sleep for 4 seconds
+  40:27 bob has woken up
+  40:37 eve has woken up
+  ```
+
