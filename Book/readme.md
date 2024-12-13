@@ -853,3 +853,62 @@ Virtualization enables multiple, isolated instances of computing environments or
 2. **Client-Server Interaction**:
    - Networked interfaces facilitate middleware and application-level solutions.
 
+
+### Processes and Clients
+- **X Window System**: An example of a networked user interface where the application acts as a client to the X-kernel, which operates as a server.
+- **Improving X**: 
+  - Applications often mix logic and user-interface commands and can operate synchronously with the X-kernel.
+  - Alternatives include allowing applications full control over display (e.g., VNC) or providing high-level display operations for efficiency.
+
+### Virtual Desktop Environment
+- With the rise of cloud applications, there’s a focus on creating seamless user experiences through web browsers (e.g., Google Chromebook).
+
+### Client-Side Software
+- Designed for distribution transparency:
+  - **Access Transparency**: Uses client-side stubs for RPCs.
+  - **Location/Migration Transparency**: Manages actual locations of services.
+  - **Replication Transparency**: Handles multiple invocations via stubs.
+  - **Failure Transparency**: Masks server and communication failures.
+
+### Servers
+- **General Organization**:
+  - Servers implement specific services, handling incoming requests.
+  - Types:
+    - **Iterative Server**: Handles one request at a time.
+    - **Concurrent Server**: Uses threads or processes to handle multiple requests, suitable for blocking operations.
+
+- **Contacting a Server**:
+  - Services typically use specific ports (e.g., FTP on ports 20/21).
+  - Dynamic endpoint assignment can be achieved via approaches like DNS.
+
+- **Out-of-Band Communication**:
+  - Urgent messages can be handled using separate ports or transport layer facilities (e.g., TCP).
+
+- **Stateless vs. Stateful Servers**:
+  - **Stateless Servers**: Do not retain client state, which reduces state inconsistencies but may impact performance (e.g., inability to prefetch).
+  - **Stateful Servers**: Retain client information, allowing optimizations like prefetching, leading to better performance.
+
+### Object Servers
+- Focus on activation policies and threading models to handle requests.
+- Example of an object server implementation using the Ice runtime system in Python, demonstrating object registration and request handling.
+
+### Server Clusters
+- A common architecture to handle requests efficiently:
+  - Crucial to manage request dispatching to avoid bottlenecks.
+  - Using DNS for client transparency, ensuring clients remain unaware of distribution issues.
+
+### Code Migration
+- Reasons for migrating code include load distribution, flexibility, and privacy/security considerations.
+- **Models of Code Mobility**:
+  - **Weak Mobility**: Moves only code and data segments; simpler but may require rebooting.
+  - **Strong Mobility**: Transfers the entire object including execution state; allows cloning.
+
+- **Heterogeneous Systems**:
+  - Challenges arise from different hardware and OS dependencies, requiring abstraction through virtual machines (VMs) or interpreted languages.
+
+- **Migrating Virtual Machines**:
+  - Approaches include pushing memory pages, stopping the VM for migration, or letting the new VM pull pages as needed.
+
+### Performance Considerations
+- Virtual machine migration can lead to service unavailability and needs careful management of response times during the migration process.
+
