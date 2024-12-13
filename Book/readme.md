@@ -572,6 +572,32 @@ print(t3)
 
 # Chapter 3
 
+### Summary  
+This text provides an overview of distributed systems, focusing on the concepts of processes and threads. It explains how threads function as lightweight processes, enabling efficient execution through context switching. The document discusses the advantages of multithreading, including improved performance, parallelism, and reduced blocking. It also contrasts kernel-level and user-level threading, explores the virtualization of processes, and touches on the implications for server-client interactions, code migration, and networked applications.
+
+### Highlights -🖥️  
+- **Threads vs. Processes:** Threads are lightweight, allowing efficient context switching without OS intervention.  
+- **Performance Benefits:** Multithreading reduces blocking and enhances parallel execution, especially on multiprocessor systems.  
+- **Context Switching Costs:** Thread context switching is cheaper than process switching, benefiting system performance.  
+- **User vs. Kernel Threads:** User-level threads provide efficiency, while kernel threads manage blocking more effectively.  
+- **Virtualization Importance:** Virtualization enables portability and isolation of applications across different environments.  
+- **Stateless vs. Stateful Servers:** Stateless servers enhance reliability, while stateful servers can improve performance through caching.  
+- **Code Migration:** Moving code instead of data can address privacy issues and optimize resource usage in distributed systems.
+
+### Key Insights -📊  
+- **Thread Sharing:** Threads within the same process share memory space, which simplifies communication but increases error risk. This characteristic allows for faster inter-thread communication compared to inter-process communication.  
+- **Blocking Behavior:** Multithreading can prevent a single-threaded process from blocking during I/O operations, significantly improving responsiveness in applications like web servers. This can lead to better resource utilization and user experience.  
+- **Context Switching Dynamics:** The overhead of context switching can impact performance, particularly with CPU cache effects. Efficient context management is crucial for optimizing system throughput and minimizing latency.  
+- **Kernel vs. User Space:** The choice between kernel-level and user-level threads involves trade-offs between performance and complexity, influencing how applications manage concurrency and responsiveness.  
+- **Virtualization Techniques:** Virtualization allows for resource allocation and management across distributed systems, enhancing flexibility and scalability. This is vital for cloud computing applications, where resources must be dynamically allocated.  
+- **Server Design Considerations:** The design of servers—whether stateful or stateless—affects their reliability and performance. Understanding these trade-offs is key for system architects when designing scalable services.  
+- **Code Mobility Strategies:** The ability to migrate code rather than data can optimize performance and ensure compliance with data privacy regulations, highlighting the need for adaptable architectures in distributed systems.
+
+
+
+
+
+
 ### Processes and Threads
 
 #### Introduction to Threads
