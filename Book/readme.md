@@ -938,3 +938,156 @@ Virtualization enables multiple, isolated instances of computing environments or
 ### Performance Considerations
 - Virtual machine migration can lead to service unavailability and needs careful management of response times during the migration process.
 
+
+
+
+
+# Chapter 4
+# Communication in Distributed Systems
+
+## Foundations of Communication
+
+### Basic Networking Model
+- Focuses on message-passing.
+- Drawbacks:
+  - Often unneeded or unwanted functionality.
+  - Violates access transparency.
+
+### Layered Protocols
+#### Low-Level Layers
+- **Physical Layer**: Specifies and implements bit transmission.
+- **Data Link Layer**: Manages framing for error and flow control.
+- **Network Layer**: Handles packet routing in a computer network.
+  - **Observation**: Many distributed systems use the network layer as the lowest-level interface.
+
+#### Transport Layer
+- **Importance**: Provides communication facilities for distributed systems.
+- **Standard Internet Protocols**:
+  - **TCP**: Connection-oriented, reliable, stream-oriented.
+  - **UDP**: Unreliable, best-effort, datagram communication.
+
+#### Middleware Layer
+- Provides common services and protocols for diverse applications:
+  - Rich communication protocols.
+  - (Un)marshaling of data for integrated systems.
+  - Naming and security protocols.
+  - Scaling mechanisms like replication and caching.
+- Application-specific protocols remain.
+
+---
+
+## Types of Communication
+
+### Transient vs. Persistent Communication
+- **Transient**: Messages discarded if undelivered.
+- **Persistent**: Messages stored until successfully delivered.
+
+### Synchronization Points
+- At request submission.
+- At request delivery.
+- After request processing.
+
+### Client/Server Communication
+- **Observations**:
+  - Transient synchronous communication.
+  - Client and server must be active simultaneously.
+  - Drawbacks:
+    - Client blocked while waiting.
+    - Failures handled immediately.
+    - Not suitable for certain use cases (e.g., mail, news).
+
+### Messaging
+- **Message-Oriented Middleware**:
+  - Enables high-level persistent asynchronous communication.
+  - Processes send queued messages.
+  - Middleware ensures fault tolerance.
+
+---
+
+## Remote Procedure Call (RPC)
+
+### Basic RPC Operation
+1. Client procedure calls client stub.
+2. Stub builds message; calls local OS.
+3. OS sends message to remote OS.
+4. Remote OS gives message to server stub.
+5. Stub unpacks parameters; calls server.
+6. Server processes and returns result to stub.
+7. Stub builds reply message; calls OS.
+8. OS sends reply to client’s OS.
+9. Client’s OS passes reply to client stub.
+10. Client stub returns result to client.
+
+### Parameter Passing in RPC
+- Challenges:
+  - Different data representations (e.g., byte ordering).
+  - Encoding and decoding parameters.
+  - **Copy-in/copy-out semantics**: Ensures independence during execution.
+- Limitations:
+  - Full access transparency not realizable.
+  - Remote reference mechanisms enhance access transparency.
+
+### Asynchronous RPC
+- Allows client to proceed without waiting for server reply.
+
+### Multiple RPCs
+- Sending requests to multiple servers concurrently.
+
+---
+
+## Message-Oriented Communication
+
+### Sockets
+#### Berkeley Socket Interface
+- Key Operations:
+  - `socket`: Create a communication endpoint.
+  - `bind`: Attach local address.
+  - `listen`: Specify maximum pending requests.
+  - `accept`: Block until connection request.
+  - `connect`: Establish connection.
+  - `send` and `receive`: Data transmission.
+  - `close`: Release connection.
+
+#### Example: Python Socket Code
+- Server and client implementations using socket programming.
+
+### Advanced Messaging with ZeroMQ
+- Patterns:
+  - Request-reply.
+  - Publish-subscribe.
+  - Pipeline.
+- Code examples for each pattern.
+
+### MPI
+- Flexibility with operations:
+  - `MPI_SEND`: Send message and wait.
+  - `MPI_RECV`: Receive message.
+  - Non-blocking options available (e.g., `MPI_ISEND`, `MPI_IRECV`).
+
+### Queue-Based Messaging
+- Operations:
+  - `PUT`: Append message to queue.
+  - `GET`: Block until queue is nonempty.
+  - `POLL`: Non-blocking message retrieval.
+  - `NOTIFY`: Trigger handler when new message arrives.
+- **Message Broker**:
+  - Handles heterogeneity by transforming message formats.
+  - Provides subject-based routing for publish-subscribe models.
+
+---
+
+## Example: Advanced Message Queuing Protocol (AMQP)
+
+### Overview
+- Protocol for high-level messaging.
+- Basic Model:
+  - Stable connection contains one-way channels.
+  - Channels form sessions for communication.
+
+### Code Examples
+#### Producer
+- Creates exchanges and queues, binds them, and publishes messages.
+
+#### Consumer
+- Connects to queue, retrieves messages, and processes them.
+
