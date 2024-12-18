@@ -853,8 +853,6 @@ Virtualization enables multiple, isolated instances of computing environments or
      - Wrapping sensitive instructions to divert control to the VMM.
      - **Paravirtualization**: Modifies the guest OS.
 
----
-
 ### **Virtualization Techniques**
 1. **Virtual Machines (VMs)**:
    - Abstract physical hardware, allowing multiple VMs on a single machine.
@@ -923,23 +921,57 @@ Virtualization enables multiple, isolated instances of computing environments or
   - Crucial to manage request dispatching to avoid bottlenecks.
   - Using DNS for client transparency, ensuring clients remain unaware of distribution issues.
 
-### Code Migration
-- Reasons for migrating code include load distribution, flexibility, and privacy/security considerations.
-- **Models of Code Mobility**:
-  - **Weak Mobility**: Moves only code and data segments; simpler but may require rebooting.
-  - **Strong Mobility**: Transfers the entire object including execution state; allows cloning.
-
-- **Heterogeneous Systems**:
-  - Challenges arise from different hardware and OS dependencies, requiring abstraction through virtual machines (VMs) or interpreted languages.
-
-- **Migrating Virtual Machines**:
-  - Approaches include pushing memory pages, stopping the VM for migration, or letting the new VM pull pages as needed.
-
-### Performance Considerations
-- Virtual machine migration can lead to service unavailability and needs careful management of response times during the migration process.
 
 
+### **Processes in Code Migration**  
+Code migration refers to the transfer of code and execution between systems, often driven by the following reasons:  
 
+#### **Reasons to Migrate Code**
+1. **Load Distribution**:
+   - Ensures balanced server load in data centers to avoid energy wastage.
+   - Minimizes communication latency by moving computations closer to the data source (e.g., in mobile computing).  
+2. **Flexibility**:
+   - Facilitates on-demand software deployment without requiring pre-installation, enabling dynamic configuration.  
+3. **Privacy and Security**:
+   - Addresses restrictions on data movement due to legal or security constraints by moving code instead of data (e.g., in federated machine learning).  
+
+---
+
+### **Paradigms and Models for Code Mobility**  
+1. **Code Mobility Paradigms**:  
+   - **Weak Mobility**:
+     - Transfers only the **code** and **data segments** of a process.
+     - Execution starts afresh at the destination.
+     - Commonly involves *code shipping* (push) or *code fetching* (pull).
+   - **Strong Mobility**:
+     - Transfers the **code**, **data**, and the **execution state** (the running context).
+     - Methods include:
+       - **Migration**: Moves the complete process to another system.
+       - **Cloning**: Creates a replica with the same execution state.
+
+
+
+### **Migration in Heterogeneous Systems**  
+1. **Challenges**:
+   - Compatibility issues due to differences in hardware, operating systems, or runtime environments.
+   - Variability in definitions of process/thread/processor contexts.  
+2. **Solutions**:
+   - Use **abstract machines** (e.g., virtual machines or interpreted languages) for platform independence.
+   - Virtual Machine Monitors (VMMs) provide partial solutions but are limited by OS dependencies.
+
+
+
+### **Virtual Machine (VM) Migration**  
+1. **Methods**:
+   - **Pushing Pages**:
+     - Sends memory pages to the new VM and resends modified pages during migration.
+   - **Stop-and-Copy**:
+     - Stops the source VM, migrates its memory, and starts the destination VM.
+   - **Demand Paging**:
+     - Starts the destination VM immediately and copies memory pages as needed.
+2. **Performance Concerns**:
+   - Complete migrations can take several seconds, rendering services unavailable during the process.
+   - Response time measurements show service interruptions during migration.
 
 
 # Chapter 4
@@ -1074,7 +1106,7 @@ Virtualization enables multiple, isolated instances of computing environments or
   - Handles heterogeneity by transforming message formats.
   - Provides subject-based routing for publish-subscribe models.
 
----
+
 
 ## Example: Advanced Message Queuing Protocol (AMQP)
 
